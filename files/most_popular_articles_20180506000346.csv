@@ -1,0 +1,4 @@
+path,article_name,slug,request_status,page_views
+/article/candidate-is-jerk,Candidate is jerk, alleges rival,candidate-is-jerk,200 OK,338647
+/article/bears-love-berries,Bears love berries, alleges bear,bears-love-berries,200 OK,253801
+/article/bad-things-gone,Bad things gone, say good people,bad-things-gone,200 OK,170098
