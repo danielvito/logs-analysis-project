@@ -29,7 +29,7 @@ def most_popular_three_articles():
     """Return the most popular three articles of all time"""
     query = """
     select
-        l.path, a.title as "article_name", a.slug,
+        a.title as "article_name", l.path, a.slug,
         l.status as "request_status", count(l.id) as page_views
     from
         log l
@@ -39,7 +39,7 @@ def most_popular_three_articles():
         and l.path like '%article%'
         and l.status = '200 OK'
     group by
-        l.path, a.title, a.slug, l.status
+        a.title, l.path, a.slug, l.status
     order by page_views desc
         limit 3"""
     return execute_query(query)
@@ -78,10 +78,10 @@ def days_with_more_than_1perc_errors():
             case when status <> '200 OK' then 1
             else 0 end
         ) as "total_errors",
-        (sum(
+        to_char((sum(
             case when status <> '200 OK' then 1
             else 0 end
-        ) * 100)::numeric / count(*) as "percentual_errors"
+        ) * 100)::numeric / count(*), 'FM999999999.00') as "percentual_errors"
     from
         log l
     where
